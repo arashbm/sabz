@@ -1,0 +1,23 @@
+development:
+  adapter: postgresql
+  encoding: unicode
+  database: sabz_development
+  pool: 5
+  username: arashbm
+  password:
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  database: sabz_test
+  pool: 5
+  username: arashbm
+  password:
+
+production:
+  adapter: postgresql
+  encoding: unicode
+  database: sabz_production
+  pool: 5
+  username: sabz
+  password:
