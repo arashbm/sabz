@@ -1,33 +1,53 @@
 <%- model_class = Request -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
+  <h1><%= @request.name %></h1>
 </div>
 
-<dl class="dl-horizontal">
-  <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
-  <dd><%= @request.name %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:sku) %>:</strong></dt>
-  <dd><%= @request.sku %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:manufacturer) %>:</strong></dt>
-  <dd><%= @request.manufacturer %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:quantity) %>:</strong></dt>
-  <dd><%= @request.quantity %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:discription) %>:</strong></dt>
-  <dd><%= @request.discription %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:url) %>:</strong></dt>
-  <dd><%= @request.url %></dd>
-  <dt><strong><%= model_class.human_attribute_name(:requester_id) %>:</strong></dt>
-  <dd><%= @request.requester_id %></dd>
-</dl>
+<ul class="unstyled">
+  <li>
+    <strong><%= model_class.human_attribute_name(:requester) %>:</strong>
+    <%= @request.requester.full_name_with_institute %>
+  </li>
+  <li>
+    <strong><%= model_class.human_attribute_name(:quantity) %>:</strong>
+    <%= @request.quantity %>
+  </li>
+  <% unless @request.manufacturer.blank? %>
+    <li>
+      <strong><%= model_class.human_attribute_name(:manufacturer) %>:</strong>
+      <%= @request.manufacturer %>
+    </li>
+  <% end %>
+  <% unless @request.sku.blank? %>
+    <li>
+      <strong><%= model_class.human_attribute_name(:sku) %>:</strong>
+      <%= @request.sku %>
+    </li>
+  <% end %>
+  <% unless @request.url.blank? %>
+    <li>
+      <strong><%= model_class.human_attribute_name(:url) %>:</strong>
+      <%= link_to @request.url do %>
+        <i class='icon-external-link'></i>
+      <% end %>
+    </li>
+  <% end %>
+  <% unless @request.discription.blank? %>
+    <div>
+      <%= simple_format @request.discription %>
+    </div>
+  <% end %>
+</ul>
 
 <div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              requests_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_request_path(@request), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              request_path(@request),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
-</div>
+  <% if can? :update, @request %>
+    <%= link_to t('.edit', :default => t("helpers.links.edit")), edit_request_path(@request), :class => 'btn' %>
+  <% end %>
+  <% if can? :destroy, @request %>
+    <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+      request_path(@request),
+      :method => 'delete',
+      :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+      :class => 'btn btn-danger' %>
+    <% end  %>
+  </div>

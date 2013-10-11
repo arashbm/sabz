@@ -1,0 +1,45 @@
+fa:
+  activerecord:
+    models:
+      product: محصول
+      user: کاربر
+    attributes:
+      default: &common
+        title: عنوان
+        created_at: ساخته‌شده در
+        updated_at: به‌روز‌شده در  
+      product:
+        <<: *common
+        description: توضیح
+        provider: ارائه‌دهنده
+        manufacturer: سازنده
+        quantity: مقدار/حجم
+      request:
+        <<: *common
+        description: توضیح
+        requester: درخواست‌کننده
+        manufacturer: سازنده
+        quantity: مقدار/حجم
+    values:
+      product:
+        state:
+          pending: در انتظار بررسی مدیر
+          accepted: مورد تایید
+          expired: منقضی
+          deleted: حدف شده
+        status_class:
+          pending: info
+          accepted: success
+          expired: important
+          deleted: important
+      request:
+        state:
+          pending: در انتظار بررسی مدیر
+          accepted: مورد تایید
+          expired: منقضی
+          deleted: حدف شده
+        status_class:
+          pending: info
+          accepted: success
+          expired: important
+          deleted: important

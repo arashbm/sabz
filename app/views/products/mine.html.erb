@@ -1,0 +1,23 @@
+<%- model_class = Product -%>
+<div class="page-header">
+  <h1><%=t '.title' %></h1>
+</div>
+
+<% ['expired', 'accepted', 'pending', 'deleted'].each do |s| %>
+  <section>
+    <% p = @products.where(state: s) %>
+    <% if p.count > 0 %>
+      <h2><%= product_state Product.new(state: s) %></h2>
+      <%= content_tag_for :div, @products.where(state: s) do |product| %>
+        <%= link_to product_path(product) do %>
+          <h3><%= product.name %> <small><%= product.manufacturer %></small></h3>
+        <% end %>
+        <%= render product %>
+      <% end %>
+    <% end %>
+  </section>
+<% end %>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_product_path,
+            :class => 'btn btn-primary' %>

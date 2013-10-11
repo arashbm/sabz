@@ -1,0 +1,30 @@
+fa:
+  layouts:
+    navbar:
+      sign_up_html: <i class="icon-book"></i> ثبت‌نام
+      sign_in_html: <i class="icon-lock"></i> ورود
+  admin:
+    domains:
+      index:
+        title: دامنه‌ها
+    products:
+      index:
+        title: محصولات فروشگاه
+      show:
+        no_description: توضیحی اضافه نشده.
+      variant_list:
+        new_html: <i class="icon-plus"></i> ایجاد گونه
+      attached_images:
+        attach_image_html: <i class="icon-plus"></i> آپلود عکس
+        attach_image: آپلود عکس
+        no_attached_images: تاکنون عکسی برای این محصول اضافه نشده.
+    orders:
+      index:
+        title: مدیریت سفارشات
+      show:
+        add_item_html: <i class='icon-plus'></i> اضافه کردن
+    shops:
+      index:
+        title: همه‌ی فروشگاه‌های شما
+      show:
+        manage_domains: مدیریت دامنه‌ها

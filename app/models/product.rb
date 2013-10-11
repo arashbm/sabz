@@ -1,7 +1,26 @@
 class Product < ActiveRecord::Base
   belongs_to :provider, class_name: User
 
-  def authorized_to_edit?(user)
-    provider == user || user.admin?
+  validates :state, inclusion: { in: Rails.configuration.product_states }
+  validates :last_state, inclusion: { in: Rails.configuration.product_states }
+  validates :name, presence: true
+  validates :quantity, presence: true
+  validates :sku, presence: true
+
+  before_validation :set_default_state
+
+  default_scope order('updated_at DESC')
+
+  def set_default_state
+    self.state ||= Rails.configuration.product_default_state
+    self.last_state ||= Rails.configuration.product_default_state
+  end
+
+  def soft_destroy
+    update(state: 'deleted', last_state: state) unless state == 'deleted'
+  end
+
+  def recycle
+    update(state: last_state)
   end
 end

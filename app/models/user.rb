@@ -7,10 +7,16 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    email.in? Rails.configuration.admin_emails
+    # true
+    false
+    # email.in? Rails.configuration.admin_emails
   end
 
-  def authorized_to_edit?(user)
-    user.id == id || user.admin?
+  def full_name
+    "#{first_name} #{last_name}"
+  end
+
+  def full_name_with_institute
+    "#{full_name} (#{institute})"
   end
 end

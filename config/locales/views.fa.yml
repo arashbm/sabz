@@ -1,0 +1,13 @@
+fa:
+  layouts:
+    navbar:
+      sign_up_html: <i class="icon-book"></i> ثبت‌نام
+      sign_in_html: <i class="icon-lock"></i> ورود
+  products:
+    index:
+      title: محصولات عرضه‌شده
+    show:
+      no_description: توضیحی اضافه نشده.
+  requests:
+    index:
+      title: درخواست‌ها

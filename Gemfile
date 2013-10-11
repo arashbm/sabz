@@ -41,3 +41,7 @@ group :production do
 end
 
 gem 'puma'
+
+gem 'sidekiq'
+
+gem 'cancan'

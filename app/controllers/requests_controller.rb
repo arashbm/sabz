@@ -1,13 +1,18 @@
 class RequestsController < ApplicationController
+
   before_action :authenticate_user!, except: [:show, :index]
+  load_and_authorize_resource except: [:create]
 
   def index
-    @requests = Request.all
+    @requests = @requests.where.not(state: 'deleted')
     respond_with(@requests)
   end
 
+  def mine
+    @requests = Request.where(requester: current_user) 
+  end
+
   def show
-    @request = Request.find(params[:id])
     respond_with(@request)
   end
 
@@ -26,20 +31,27 @@ class RequestsController < ApplicationController
   end
 
   def update
-    @request = current_user.requests.find(params[:id])
     @request.update(request_params)
     respond_with(@request)
   end
 
   def destroy
-    @request = current_user.requests.find(params[:id])
-    @request.destroy
+    @request.soft_destroy
     respond_with(@request)
+  end
+
+  def recycle
+    @product.recycle
+    respond_with(@product)
   end
 
   private
 
   def request_params
-    params.require(:request).permit(:name, :sku, :manufacturer, :quantity, :discription, :url)
+    if current_user.admin?
+      params.require(:request).permit(:name, :sku, :manufacturer, :quantity, :discription, :url, :state)
+    else
+      params.require(:request).permit(:name, :sku, :manufacturer, :quantity, :discription, :url)
+    end
   end
 end

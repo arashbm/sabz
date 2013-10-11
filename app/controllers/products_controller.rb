@@ -1,15 +1,18 @@
 class ProductsController < ApplicationController
 
   before_action :authenticate_user!, except: [:show, :index]
+  load_and_authorize_resource except: [:create]
 
   def index
-    @products = Product.all
+    @products = @products.where.not(state: 'deleted')
     respond_with(@products)
   end
 
+  def mine
+    @products = Product.where(provider: current_user) 
+  end
+
   def show
-    @products = Product.all
-    @product = @products.find(params[:id])
     respond_with(@product)
   end
 
@@ -19,7 +22,6 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    @product = current_user.products.find(params[:id])
   end
 
   def create
@@ -29,20 +31,27 @@ class ProductsController < ApplicationController
   end
 
   def update
-    @product = current_user.products.find(params[:id])
     @product.update(product_params)
     respond_with(@product)
   end
 
   def destroy
-    @product = current_user.products.find(params[:id])
-    @product.destroy
+    @product.soft_destroy
+    respond_with(@product)
+  end
+
+  def recycle
+    @product.recycle
     respond_with(@product)
   end
 
   private
 
   def product_params
-    params.require(:product).permit(:name, :sku, :manufacturer, :quantity, :discription, :url)
+    if current_user.admin?
+      params.require(:product).permit(:name, :sku, :manufacturer, :quantity, :discription, :url, :state)
+    else
+      params.require(:product).permit(:name, :sku, :manufacturer, :quantity, :discription, :url)
+    end
   end
 end

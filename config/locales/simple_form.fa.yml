@@ -1,0 +1,24 @@
+fa:
+  simple_form:
+    "yes": 'بله'
+    "no": 'خیر'
+    required:
+      text: 'الزامی'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "نگاهی به مشکلات فرم بیندازید:"
+
+    placeholders:
+      product:
+        url: 'http://example.com/abc'
+      request:
+        url: 'http://example.com/abc'
+
+    hints:
+      product:
+        url: 'آدرس اینترنتی صفحه‌ی محصول در وبسایت سازنده. آدرس اینترنتی باید با http:// یا https:// شروع شود.'
+      request:
+        url: 'آدرس اینترنتی صفحه‌ی محصول در وبسایت سازنده. آدرس اینترنتی باید با http:// یا https:// شروع شود.'

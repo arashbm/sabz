@@ -1,0 +1,40 @@
+<div>
+  <%= product.provider.full_name_with_institute %> | <i class='icon-time'></i> <%= time_ago_in_words product.updated_at %>
+  <% if product.state != 'accepted' %>
+    | <%= product_state_with_label product %>
+    <% case product.state %>
+    <% when  'deleted' %>
+      <% if can? :recycle, product %>
+        <%= link_to t('helpers.links.recycle_html'), recycle_product_path(product), method: 'patch', class: 'btn btn-mini btn-success' %>
+      <% end %>
+    <% when 'expired' %>
+      <% if can? :update, product %>
+        <%= form_for product, html: { style: 'display: inline' } do |f| %>
+          <%= f.hidden_field :state, value: 'pending' %>
+          <%= f.submit t('helpers.links.unexpire'), class: 'btn btn-mini btn-success' %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+  </div>
+<ul>
+  <li><strong><%= Product.human_attribute_name :quantity %>:</strong> <%= product.quantity %></li>
+  <li><strong><%= Product.human_attribute_name :sku %>:</strong> <%= product.sku %></li>
+  <% unless product.url.blank? %>
+    <li><strong><%= Product.human_attribute_name :url %>:</strong>
+      <%= link_to product.url do %>
+        <i class='icon-external-link'></i>
+      <% end %>
+    </li>
+  <% end %>
+  </ul>
+</ul>
+<div><%= simple_format product.discription %></div>
+<div>
+  <% if can? :update, product %>
+    <%= link_to t('.edit', default: t("helpers.links.edit")), edit_product_path(product), class: 'btn btn-mini' %>
+  <% end %>
+  <% if can?(:destroy, product) && product.state != 'deleted'  %>
+    <%= link_to t('.destroy', default: t("helpers.links.destroy")), product_path(product), method: :delete, data: { :confirm => t("helpers.links.confirm") }, class: 'btn btn-mini btn-danger' %>
+  <% end %>
+</div>

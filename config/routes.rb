@@ -1,7 +1,24 @@
 Sabz::Application.routes.draw do
-  resources :requests
 
-  resources :products
+  root to: 'products#index'
+
+  resources :requests do
+    member do
+      patch 'recycle'
+    end
+    collection do
+      get :mine
+    end
+  end
+
+  resources :products do
+    member do
+      patch 'recycle'
+    end
+    collection do
+      get :mine
+    end
+  end
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
