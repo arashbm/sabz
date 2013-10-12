@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131011193009) do
+ActiveRecord::Schema.define(version: 20131011193010) do
 
   create_table "conversation_memberships", force: true do |t|
     t.integer  "user_id"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 20131011193009) do
     t.string   "sku"
     t.string   "manufacturer"
     t.string   "quantity"
-    t.string   "discription"
+    t.text     "discription"
     t.string   "url"
     t.integer  "requester_id"
     t.datetime "created_at"
