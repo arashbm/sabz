@@ -45,3 +45,5 @@ gem 'puma'
 gem 'sidekiq'
 
 gem 'cancan'
+
+gem "awesome_nested_set", "~> 3.0.0.rc.2"

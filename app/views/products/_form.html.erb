@@ -3,6 +3,7 @@
   <% if current_user.admin? %>
     <%= f.input :state, collection: Rails.configuration.product_states %>
   <% end %>
+  <%= f.association :category, collection: categories_collection%>
   <%= f.input :sku %>
   <%= f.input :manufacturer %>
   <%= f.input :quantity %>

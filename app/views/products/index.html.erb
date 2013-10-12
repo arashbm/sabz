@@ -1,6 +1,10 @@
 <%- model_class = Product -%>
 <div class="page-header">
-  <h1><%=t '.title' %></h1>
+  <h1><%=t '.title' %>
+    <% if @category %>
+      <small><%= Product.human_attribute_name :category %>: <%= @category.name %></small>
+    <% end %>
+  </h1>
 </div>
 <%= content_tag_for :div, @products do |product| %>
   <%= link_to product_path(product) do %>
@@ -10,5 +14,5 @@
 <% end %>
 
 <%= link_to t('.new', :default => t("helpers.links.new")),
-            new_product_path,
-            :class => 'btn btn-primary' %>
+  new_product_path,
+  :class => 'btn btn-primary' %>

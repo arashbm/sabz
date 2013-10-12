@@ -31,6 +31,8 @@ GEM
       json
     arel (4.0.0)
     atomic (1.1.14)
+    awesome_nested_set (3.0.0.rc.2)
+      activerecord (~> 4.0.0)
     builder (3.1.4)
     cancan (1.6.10)
     celluloid (0.14.1)
@@ -170,6 +172,7 @@ PLATFORMS
 
 DEPENDENCIES
   airbrake (~> 3.1.8)
+  awesome_nested_set (~> 3.0.0.rc.2)
   cancan
   coffee-rails (~> 4.0.0)
   devise-i18n

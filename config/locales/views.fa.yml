@@ -6,6 +6,7 @@ fa:
   products:
     index:
       title: محصولات عرضه‌شده
+      go: برو
     show:
       no_description: توضیحی اضافه نشده.
   requests:

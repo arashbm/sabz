@@ -5,6 +5,10 @@ class ProductsController < ApplicationController
 
   def index
     @products = @products.where.not(state: 'deleted')
+    unless params[:category].blank?
+      @category = Category.find(params[:category])
+      @products = @products.where(category_id: @category.self_and_descendants.pluck(:id))
+    end
     respond_with(@products)
   end
 
@@ -49,9 +53,9 @@ class ProductsController < ApplicationController
 
   def product_params
     if current_user.admin?
-      params.require(:product).permit(:name, :sku, :manufacturer, :quantity, :discription, :url, :state)
+      params.require(:product).permit(:name, :category_id, :sku, :manufacturer, :quantity, :discription, :url, :state)
     else
-      params.require(:product).permit(:name, :sku, :manufacturer, :quantity, :discription, :url)
+      params.require(:product).permit(:name, :category_id, :sku, :manufacturer, :quantity, :discription, :url)
     end
   end
 end

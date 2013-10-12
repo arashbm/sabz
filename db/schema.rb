@@ -11,7 +11,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131011193010) do
+ActiveRecord::Schema.define(version: 20131012080829) do
+
+  create_table "categories", force: true do |t|
+    t.string   "name"
+    t.integer  "parent_id"
+    t.integer  "lft"
+    t.integer  "rgt"
+    t.integer  "depth"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
 
   create_table "conversation_memberships", force: true do |t|
     t.integer  "user_id"
@@ -55,8 +67,10 @@ ActiveRecord::Schema.define(version: 20131011193010) do
     t.datetime "updated_at"
     t.string   "state"
     t.string   "last_state"
+    t.integer  "category_id"
   end
 
+  add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
   add_index "products", ["provider_id"], name: "index_products_on_provider_id", using: :btree
 
   create_table "requests", force: true do |t|
@@ -71,7 +85,10 @@ ActiveRecord::Schema.define(version: 20131011193010) do
     t.datetime "updated_at"
     t.string   "state"
     t.string   "last_state"
+    t.integer  "category_id"
   end
+
+  add_index "requests", ["category_id"], name: "index_requests_on_category_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "first_name"

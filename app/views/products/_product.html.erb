@@ -16,6 +16,9 @@
       <% end %>
     <% end %>
   <% end %>
+  <% if product.category %>
+    <strong><%= Product.human_attribute_name :category %>:</strong> <%= link_to product.category.name, products_path(category: product.category.id) %>
+  <% end %>
   </div>
 <ul>
   <li><strong><%= Product.human_attribute_name :quantity %>:</strong> <%= product.quantity %></li>

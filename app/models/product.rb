@@ -1,5 +1,6 @@
 class Product < ActiveRecord::Base
   belongs_to :provider, class_name: User
+  belongs_to :category
 
   validates :state, inclusion: { in: Rails.configuration.product_states }
   validates :last_state, inclusion: { in: Rails.configuration.product_states }

@@ -1,5 +1,6 @@
 class Request < ActiveRecord::Base
   belongs_to :requester, class_name: User
+  belongs_to :category
 
   validates :state, inclusion: { in: Rails.configuration.request_states }
   validates :last_state, inclusion: { in: Rails.configuration.product_states }
