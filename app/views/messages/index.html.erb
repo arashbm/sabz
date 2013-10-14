@@ -1,0 +1,25 @@
+<%- model_class = Message -%>
+<div class="page-header">
+  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+</div>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:with) %></th>
+      <th><%= model_class.human_attribute_name(:updated_at) %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @people.each do |person| %>
+      <tr>
+        <td><%= link_to messages_with_path(person) %></td>
+        <td><%= Message.last_conversation_with(person).content %></td>
+        <td><%= time_ago_in_words Message.last_conversation_with(person).created_at %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= link_to t('.new', :default => t("helpers.links.new")),
+            new_message_path,
+            :class => 'btn btn-primary' %>

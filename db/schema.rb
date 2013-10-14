@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131012080829) do
+ActiveRecord::Schema.define(version: 20131012103130) do
 
   create_table "categories", force: true do |t|
     t.string   "name"
@@ -25,35 +25,16 @@ ActiveRecord::Schema.define(version: 20131012080829) do
 
   add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
 
-  create_table "conversation_memberships", force: true do |t|
-    t.integer  "user_id"
-    t.integer  "conversation_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "conversation_memberships", ["conversation_id"], name: "index_conversation_memberships_on_conversation_id", using: :btree
-  add_index "conversation_memberships", ["user_id"], name: "index_conversation_memberships_on_user_id", using: :btree
-
-  create_table "conversations", force: true do |t|
-    t.integer  "about_id"
-    t.string   "about_type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "conversations", ["about_id"], name: "index_conversations_on_about_id", using: :btree
-
   create_table "messages", force: true do |t|
-    t.integer  "sender_id"
-    t.integer  "conversation_id"
+    t.integer  "from_id"
+    t.integer  "to_id"
     t.text     "content"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
-  add_index "messages", ["conversation_id"], name: "index_messages_on_conversation_id", using: :btree
-  add_index "messages", ["sender_id"], name: "index_messages_on_sender_id", using: :btree
+  add_index "messages", ["from_id"], name: "index_messages_on_from_id", using: :btree
+  add_index "messages", ["to_id"], name: "index_messages_on_to_id", using: :btree
 
   create_table "products", force: true do |t|
     t.string   "name"

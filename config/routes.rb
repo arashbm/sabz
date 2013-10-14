@@ -1,5 +1,7 @@
 Sabz::Application.routes.draw do
 
+  resources :messages
+
   root to: 'products#index'
 
   resources :requests do
