@@ -11,6 +11,7 @@ class Ability
       # not logged in
     elsif user.admin?
       can :manage, :all
+      can :approve, :all
     else
       can :manage, Product, provider_id: user.id
       can :manage, Request, requester_id: user.id

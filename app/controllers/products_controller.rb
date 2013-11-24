@@ -16,6 +16,11 @@ class ProductsController < ApplicationController
     @products = Product.where(provider: current_user) 
   end
 
+  def queue
+    raise 'not accessible' unless current_user.admin?
+    @products = Product.where(state: 'pending')
+  end
+
   def show
     respond_with(@product)
   end
@@ -41,12 +46,17 @@ class ProductsController < ApplicationController
 
   def destroy
     @product.soft_destroy
-    respond_with(@product)
+    respond_with(@product, location: request.env["HTTP_REFERER"])
   end
 
   def recycle
     @product.recycle
-    respond_with(@product)
+    respond_with(@product, location: request.env["HTTP_REFERER"])
+  end
+
+  def approve
+    @product.approve
+    respond_with(@product, location: request.env["HTTP_REFERER"])
   end
 
   private

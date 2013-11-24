@@ -1,14 +1,22 @@
 fa:
+  sabz: سبز بازار
   layouts:
-    navbar:
+    application:
       sign_up_html: <i class="icon-book"></i> ثبت‌نام
       sign_in_html: <i class="icon-lock"></i> ورود
+      all_products: همه‌ی محصولات
+      my_products: محصولات من
+      messages: پیام‌ها
+      queue_products: صف بررسی
   products:
     index:
       title: محصولات عرضه‌شده
       go: برو
     show:
       no_description: توضیحی اضافه نشده.
+    queue:
+      title: صف بررسی
+      no_product_in_queue: هیچ محصولی در صف بررسی نیست.
   requests:
     index:
       title: درخواست‌ها

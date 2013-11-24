@@ -5,12 +5,11 @@ class Product < ActiveRecord::Base
   validates :state, inclusion: { in: Rails.configuration.product_states }
   validates :last_state, inclusion: { in: Rails.configuration.product_states }
   validates :name, presence: true
-  validates :quantity, presence: true
   validates :sku, presence: true
 
   before_validation :set_default_state
 
-  default_scope order('updated_at DESC')
+  default_scope { order('updated_at DESC') }
 
   def set_default_state
     self.state ||= Rails.configuration.product_default_state
@@ -18,10 +17,18 @@ class Product < ActiveRecord::Base
   end
 
   def soft_destroy
-    update(state: 'deleted', last_state: state) unless state == 'deleted'
+    update(state: 'deleted', last_state: state) if state.in? ['accepted', 'pending']
+  end
+
+  def expire
+    update(state: 'expired', last_state: state) if state.in? ['accepted', 'pending']
   end
 
   def recycle
     update(state: last_state)
+  end
+
+  def approve
+    update(state: 'accepted')
   end
 end

@@ -3,33 +3,36 @@
   <% if product.state != 'accepted' %>
     | <%= product_state_with_label product %>
     <% case product.state %>
+    <% when  'pending' %>
+      <% if can? :approve, product %>
+        <%= link_to t('helpers.links.approve_html'), approve_product_path(product), method: 'patch', class: 'btn btn-mini btn-success' %>
+      <% end %>
     <% when  'deleted' %>
       <% if can? :recycle, product %>
         <%= link_to t('helpers.links.recycle_html'), recycle_product_path(product), method: 'patch', class: 'btn btn-mini btn-success' %>
       <% end %>
     <% when 'expired' %>
-      <% if can? :update, product %>
-        <%= form_for product, html: { style: 'display: inline' } do |f| %>
-          <%= f.hidden_field :state, value: 'pending' %>
-          <%= f.submit t('helpers.links.unexpire'), class: 'btn btn-mini btn-success' %>
-        <% end %>
+      <% if can? :recycle, product %>
+        <%= link_to t('helpers.links.recycle_html'), recycle_product_path(product), method: 'patch', class: 'btn btn-mini btn-success' %>
       <% end %>
     <% end %>
   <% end %>
   <% if product.category %>
     <strong><%= Product.human_attribute_name :category %>:</strong> <%= link_to product.category.name, products_path(category: product.category.id) %>
-  <% end %>
+<% end %>
   </div>
-<ul>
-  <li><strong><%= Product.human_attribute_name :quantity %>:</strong> <%= product.quantity %></li>
-  <li><strong><%= Product.human_attribute_name :sku %>:</strong> <%= product.sku %></li>
-  <% unless product.url.blank? %>
-    <li><strong><%= Product.human_attribute_name :url %>:</strong>
-      <%= link_to product.url do %>
-        <i class='icon-external-link'></i>
-      <% end %>
-    </li>
-  <% end %>
+  <ul>
+    <% unless product.quantity.blank?  %>
+      <li><strong><%= Product.human_attribute_name :quantity %>:</strong> <%= product.quantity %></li>
+    <% end %>
+    <li><strong><%= Product.human_attribute_name :sku %>:</strong> <%= product.sku %></li>
+    <% unless product.url.blank? %>
+      <li><strong><%= Product.human_attribute_name :url %>:</strong>
+        <%= link_to product.url do %>
+          <i class='icon-external-link'></i>
+        <% end %>
+      </li>
+    <% end %>
   </ul>
 </ul>
 <div><%= simple_format product.discription %></div>

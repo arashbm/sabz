@@ -19,6 +19,9 @@ fa:
       recycle: "بازیافت"
       recycle_html: "<i class='icon-refresh'></i> بازیافت"
       recycle_icon_html: "<i class='icon-refresh'></i>"
+      approve: "تایید"
+      approve_html: "<i class='icon-check'></i> تایید"
+      approve_icon_html: "<i class='icon-check'></i>"
     titles:
       edit: "ویرایش %{model}"
       new: "ایجاد %{model}"

@@ -7,18 +7,24 @@ Sabz::Application.routes.draw do
   resources :requests do
     member do
       patch 'recycle'
+      patch 'approve'
+      patch 'unexpire'
     end
     collection do
       get :mine
+      get :queue
     end
   end
 
   resources :products do
     member do
       patch 'recycle'
+      patch 'approve'
+      patch 'unexpire'
     end
     collection do
       get :mine
+      get :queue
     end
   end
 

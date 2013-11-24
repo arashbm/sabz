@@ -9,8 +9,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    # true
-    false
+    true
     # email.in? Rails.configuration.admin_emails
   end
 
