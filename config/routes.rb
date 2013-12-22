@@ -1,6 +1,7 @@
 Sabz::Application.routes.draw do
 
   resources :messages
+  get '/messages/conversation/:user_id' => "messages#conversation", as: :conversation_messages
 
   root to: 'products#index'
 

@@ -12,14 +12,10 @@
   <tbody>
     <% @people.each do |person| %>
       <tr>
-        <td><%= link_to messages_with_path(person) %></td>
-        <td><%= Message.last_conversation_with(person).content %></td>
-        <td><%= time_ago_in_words Message.last_conversation_with(person).created_at %></td>
+        <td><%= link_to person.full_name, conversation_messages_path(person) %></td>
+        <td><%= current_user.last_conversation_with(person).content %></td>
+        <td><%= time_ago_in_words current_user.last_conversation_with(person).created_at %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-
-<%= link_to t('.new', :default => t("helpers.links.new")),
-            new_message_path,
-            :class => 'btn btn-primary' %>

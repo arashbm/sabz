@@ -2,13 +2,15 @@ class MessagesController < ApplicationController
 
   def index
     @messages = Message.all
-    people_ids = (@messages.pluck(:from_id) | @messages.pluck(:to_id)).delete_if { |i| i == current_user.id}
+    people_ids = (@messages.pluck(:from_id) | @messages.pluck(:to_id))#.delete_if { |i| i == current_user.id}
     @people = User.where(id: people_ids)
     respond_with(@messages)
   end
 
-  def show
-    respond_with(@message)
+  def conversation
+    @other_user = User.find(params[:user_id])
+    @messages = Message.where(from: @other_user, to: current_user).to_a | Message.where(from: current_user, to: @other_user).to_a
+    respond_with(@messages)
   end
 
   def new

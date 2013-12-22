@@ -44,3 +44,11 @@
     <%= link_to t('.destroy', default: t("helpers.links.destroy")), product_path(product), method: :delete, data: { :confirm => t("helpers.links.confirm") }, class: 'btn btn-mini btn-danger' %>
   <% end %>
 </div>
+
+<div>
+  <%= simple_form_for Message.new(to: product.provider) do |f| %>
+    <%= f.input :to_id, as: :hidden %>
+    <%= f.input :content %>
+    <%= f.button :submit %>
+  <% end %>
+</div>
