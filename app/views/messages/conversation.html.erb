@@ -1,0 +1,23 @@
+<%- model_class = Message -%>
+<div class="page-header">
+  <h1><%=t '.title', other: @other_user.full_name_with_institute %></h1>
+</div>
+<%= content_tag_for :div, @messages do |message| %>
+  <div>
+    <% if message.from == current_user %>
+      <div><%= t '.me' %>:</div>
+    <% else %>
+      <div><%= message.from.full_name %>:</div>
+    <% end %>
+    <div><%= simple_format message.content %></div>
+    <div><%= time_ago_in_words message.created_at %></div>
+  </div>
+<% end %>
+
+<div>
+  <%= simple_form_for Message.new(to: @other_user) do |f| %>
+    <%= f.input :to_id, as: :hidden %>
+    <%= f.input :content %>
+    <%= f.button :submit %>
+  <% end %>
+</div>
