@@ -23,6 +23,6 @@ class User < ActiveRecord::Base
 
   def last_conversation_with(user)
     all = sent_messages.where(to: user).to_a | user.sent_messages.where(to: self).to_a
-    all.sort{ |a,b| a.create_at <=> b.created_at }.last
+    all.sort{ |a,b| a.created_at <=> b.created_at }.last
   end
 end

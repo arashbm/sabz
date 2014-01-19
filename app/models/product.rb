@@ -9,7 +9,7 @@ class Product < ActiveRecord::Base
 
   before_validation :set_default_state
 
-  default_scope { order('updated_at DESC') }
+  default_scope -> { order('updated_at DESC') }
 
   def set_default_state
     self.state ||= Rails.configuration.product_default_state
