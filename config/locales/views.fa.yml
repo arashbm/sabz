@@ -4,8 +4,11 @@ fa:
     application:
       sign_up_html: <i class="icon-book"></i> ثبت‌نام
       sign_in_html: <i class="icon-lock"></i> ورود
+      sign_out_html: خروج
       all_products: همه‌ی محصولات
       my_products: محصولات من
+      all_requests: همه‌ی نیازمندی‌ها
+      my_requests: نیازمندی‌های من
       messages: پیام‌ها
       queue_products: صف بررسی
   products:

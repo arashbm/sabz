@@ -1,5 +1,7 @@
 Sabz::Application.routes.draw do
 
+  devise_for :users
+
   resources :messages
   get '/messages/conversation/:user_id' => "messages#conversation", as: :conversation_messages
 

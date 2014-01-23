@@ -50,14 +50,24 @@
           <div class="container nav-collapse">
             <ul class="nav">
               <li><%= link_to t(".all_products"), products_path  %></li>
+              <li><%= link_to t('.all_requests'), requests_path  %></li>
               <% if current_user %>
                 <li><%= link_to t(".my_products"), mine_products_path  %></li>
+                <li><%= link_to t(".my_requests"), mine_requests_path  %></li>
                 <li><%= link_to t(".messages"), messages_path  %></li>
                 <% if current_user.admin? %>
                   <li><%= link_to t(".queue_products"), queue_products_path  %></li>
                 <% end %>
               <% end %>
-              <li><%= link_to "Link3", "/path3"  %></li>
+            </ul>
+            <ul class='nav pull-right'>
+              <% if user_signed_in? %>
+                <li><%= link_to t('.prefrences_html'), edit_user_registration_path %></li>
+                <li><%= link_to t('.sign_out_html'), destroy_user_session_path, method: :delete %></li>
+              <% else %>
+                <li><%= link_to t(".sign_in_html"), new_user_session_path  %></li>
+                <li><%= link_to t('.sign_up_html'), new_user_registration_path %></li>
+              <% end %>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

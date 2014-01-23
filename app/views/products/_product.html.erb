@@ -45,10 +45,12 @@
   <% end %>
 </div>
 
-<div>
-  <%= simple_form_for Message.new(to: product.provider) do |f| %>
-    <%= f.input :to_id, as: :hidden %>
-    <%= f.input :content %>
-    <%= f.button :submit %>
-  <% end %>
-</div>
+<% if user_signed_in? && current_user != product.provider %>
+  <div>
+    <%= simple_form_for Message.new(to: product.provider) do |f| %>
+      <%= f.input :to_id, as: :hidden %>
+      <%= f.input :content %>
+      <%= f.button :submit %>
+    <% end %>
+  </div>
+<% end %>

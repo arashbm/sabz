@@ -1,6 +1,6 @@
 module CategoriesHelper
   def categories_collection
-    nested_set_options(Category) {|i| "#{'-' * i.level} #{i.name}" } 
+    nested_set_options(Category.all) {|i| "#{'-' * i.level} #{i.name}" } 
   end
 
   def nested_li(objects, &block)
