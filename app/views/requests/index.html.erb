@@ -5,7 +5,6 @@
   <thead>
     <tr>
       <th><%= Request.human_attribute_name(:name) %></th>
-      <th><%= Request.human_attribute_name(:quantity) %></th>
       <th><%= Request.human_attribute_name(:requester) %></th>
       <th><%= Request.human_attribute_name(:url) %></th>
       <th><%= Request.human_attribute_name(:created_at) %></th>
@@ -16,7 +15,6 @@
     <% @requests.each do |request| %>
       <tr>
         <td><%= link_to request.name, request_path(request) %></td>
-        <td><%= request.quantity %></td>
         <td><%= request.requester.full_name_with_institute %></td>
         <td>
           <% unless request.url.blank? %>

@@ -60,6 +60,9 @@
                 <% end %>
               <% end %>
             </ul>
+            <% if user_signed_in? %>
+              <p class="pull-right navbar-text"><%= t('.logged_in_as', name: current_user.full_name) %></p>
+            <% end %>
             <ul class='nav pull-right'>
               <% if user_signed_in? %>
                 <li><%= link_to t('.prefrences_html'), edit_user_registration_path %></li>

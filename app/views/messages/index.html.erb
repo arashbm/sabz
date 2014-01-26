@@ -1,6 +1,6 @@
 <%- model_class = Message -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%=t '.title' %></h1>
 </div>
 <table class="table table-striped">
   <thead>
@@ -12,7 +12,7 @@
   <tbody>
     <% @people.each do |person| %>
       <tr>
-        <td><%= link_to person.full_name, conversation_messages_path(person) %></td>
+        <td><%= link_to person.full_name_with_institute, conversation_messages_path(person) %></td>
         <td><%= current_user.last_conversation_with(person).content %></td>
         <td><%= time_ago_in_words current_user.last_conversation_with(person).created_at %></td>
       </tr>

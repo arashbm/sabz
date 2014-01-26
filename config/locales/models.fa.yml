@@ -2,7 +2,8 @@ fa:
   activerecord:
     models:
       product: محصول
-      request: درخواست
+      request: نیازمندی
+      message: پیام
       user: کاربر
     attributes:
       default: &common
@@ -25,6 +26,12 @@ fa:
         manufacturer: سازنده
         quantity: مقدار/حجم مورد نیاز
         sku: شماره‌ی کاتالوگ (cat. no.)
+      message:
+        <<: *common
+        content: متن
+        with: با
+        to: به
+        from: از
     values:
       product:
         state:

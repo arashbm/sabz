@@ -4,6 +4,8 @@ fa:
     application:
       sign_up_html: <i class="icon-book"></i> ثبت‌نام
       sign_in_html: <i class="icon-lock"></i> ورود
+      prefrences_html: <i class="icon-cog"></i> تنظیمات
+      logged_in_as: سلام %{name}!
       sign_out_html: خروج
       all_products: همه‌ی محصولات
       my_products: محصولات من
@@ -20,6 +22,16 @@ fa:
     queue:
       title: صف بررسی
       no_product_in_queue: هیچ محصولی در صف بررسی نیست.
+    mine:
+      title: محصولات من
   requests:
     index:
-      title: درخواست‌ها
+      title: نیازمندی‌ها
+    mine:
+      title: نیازمندی‌های من
+  messages:
+    index:
+      title: پیام‌ها
+    conversation:
+      title: مکالمات با %{other}
+      me: من
