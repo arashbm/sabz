@@ -13,8 +13,7 @@ class User < ActiveRecord::Base
   end
 
   def admin?
-    true
-    # email.in? Rails.configuration.admin_emails
+    email.in? Rails.configuration.admin_emails
   end
 
   def full_name
