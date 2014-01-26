@@ -19,5 +19,5 @@ production:
   encoding: unicode
   database: sabz_production
   pool: 5
-  username: sabz
+  username: arashbm
   password:
