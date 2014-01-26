@@ -32,6 +32,19 @@ fa:
         with: با
         to: به
         from: از
+      user:
+        <<: *common
+        email: ایمیل
+        first_name: نام
+        last_name: نام خانوادگی
+        institute: موسسه/دانشگاه
+        phone: تلفن
+        mobile: تلفن همراه
+        fax: فکس
+        address: آدرس
+        password: گذرواژه
+        password_confirmation: مجددا گذرواژه
+        current_password: گذرواژه فعلی
     values:
       product:
         state:
