@@ -1,4 +1,4 @@
-Rails.configuration.admin_emails = ['arashbm@gmail.com']
+Rails.configuration.admin_emails = ['arashbm@gmail.com', 'info@sabzbiomedicals.com']
 
 Rails.configuration.product_states = ['expired', 'pending', 'accepted', 'denied', 'deleted']
 Rails.configuration.product_default_state = 'pending'
